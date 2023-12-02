@@ -1,0 +1,79 @@
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>Pedido</h1>
+  <p>Hamburguer: <span id="hamburguer"></span></p>
+  <p>Acompanhamento: <span id="acompanhamento"></span></p>
+  <p>Bebida: <span id="bebida"></span></p>
+  <p>Total: <span id="total"></span>
+
+    <script>
+      const hamburguer = { BurguerX1: 1.36, BurguerX2: 2.31, BurguerX3: 2.81, BurguerX4: 3.21 };
+      const acompanhamento = { Nuggets: 3.69, Fritas: 1.58 };
+      const bebida = { Coca_Cola: 1.48, Fanta: 2.58, Água: 0.98 };
+
+      let pedidosHamburguer = [];
+      let pedidosAcompanhamento = [];
+      let pedidosBebida = [];
+
+      while (true) {
+        let pedidoHamburguer = prompt("Qual é o número do hamburguer que você deseja?\n(1) - BurguerX1: R$ 1,36\n(2) - BurguerX2: R$ 2,31\n(3) - BurguerX3: R$ 2,81\n(4) - BurguerX4: R$ 3,21\nDigite 0 para encerrar.");
+        if (pedidoHamburguer === '0') {
+          break;
+        }
+        if (pedidoHamburguer >= 1 && pedidoHamburguer <= 4) {
+          pedidosHamburguer.push(`BurguerX${pedidoHamburguer}`);
+        }
+      }
+
+      while (true) {
+        let pedidoAcompanhamento = prompt("Escolha o acompanhamento:\n(1) - Nuggets: R$ 3,69\n(2) - Fritas: R$ 1,58\nDigite 0 para encerrar.");
+        if (pedidoAcompanhamento === '0') {
+          break;
+        }
+        if (pedidoAcompanhamento >= 1 && pedidoAcompanhamento <= 2) {
+          pedidosAcompanhamento.push(Object.keys(acompanhamento)[pedidoAcompanhamento - 1]);
+        }
+      }
+
+      while (true) {
+        let pedidoBebida = prompt("Escolha a bebida:\n(1) - Coca-Cola: R$ 1,48\n(2) - Fanta: R$ 2,58\n(3) - Água: R$ 0,98\nDigite 0 para encerrar.");
+        if (pedidoBebida === '0') {
+          break;
+        }
+        if (pedidoBebida >= 1 && pedidoBebida <= 3) {
+          pedidosBebida.push(Object.keys(bebida)[pedidoBebida - 1]);
+        }
+      }
+
+      let total = 0;
+
+      for (let pedHambur = 0; pedHambur < pedidosHamburguer.length; pedHambur++) {
+        let pedido = pedidosHamburguer[pedHambur];
+        total += hamburguer[pedido];
+      }
+
+      for (let pedAcomp = 0; pedAcomp < pedidosAcompanhamento.length; pedAcomp++) {
+        let pedido = pedidosAcompanhamento[pedAcomp];
+        total += acompanhamento[pedido];
+      }
+
+      for (let pedBeb = 0; pedBeb < pedidosBebida.length; pedBeb++) {
+        let pedido = pedidosBebida[pedBeb];
+        total += bebida[pedido];
+      }
+
+      document.getElementById('hamburguer').innerText = pedidosHamburguer.join(", ");
+      document.getElementById('acompanhamento').innerText = pedidosAcompanhamento.join(", ");
+      document.getElementById('bebida').innerText = pedidosBebida.join(", ");
+      document.getElementById('total').innerText = total.toFixed(2);
+    </script>
+</body>
+
+</html>
